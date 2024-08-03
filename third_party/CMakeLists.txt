@@ -16,7 +16,10 @@
 # limitations under the License.
 
 # bgfx.cmake
+set(BGFX_BUILD_EXAMPLES OFF)
+set(BGFX_BUILD_TOOLS OFF)
 add_subdirectory("bgfx.cmake")
 
 # zstd
+set(ZSTD_BUILD_PROGRAMS OFF)
 add_subdirectory("zstd/build/cmake")

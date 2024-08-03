@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
             ("h,help", "Print usage")
             ("input_path", "Input file or directory path", cxxopts::value<std::string>())
             ("o,output_path", "Output directory path", cxxopts::value<std::string>())
-            ("r,recursive", "Recursively convert files in nested directories", cxxopts::value<bool>()->default_value("false")->implicit_value("true"))
+            ("r,recursive", "Recursively convert files in nested directories", cxxopts::value<bool>()->default_value("true")->implicit_value("true"))
         ;
         options.parse_positional({"input_path"});
         auto options_result = options.parse(argc, argv);
@@ -149,7 +149,9 @@ int main(int argc, char* argv[]) {
                     output_path = (image_file.parent_path() / image_file.stem());
                 }
 
-                fs::create_directories(output_path.parent_path());
+                if (output_path.has_parent_path()) {
+                    fs::create_directories(output_path.parent_path());
+                }
                 std::string output_path_string = output_path.string() + ".png";
                 convert_image(image_file.string(), output_path_string, i, image_files.size());
                 ++i;
