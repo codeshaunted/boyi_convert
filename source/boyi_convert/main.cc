@@ -56,7 +56,7 @@ std::vector<fs::path> get_image_files(const fs::path& directory, bool recursive)
 void convert_image(const std::string& input_path, const std::string& output_path, size_t i, size_t total) {
     std::ifstream input_file(input_path, std::ios::binary | std::ios::ate);
     if (!input_file.is_open()) {
-        std::cout << "error opening input file: '"<< input_path << "'" << std::endl;
+        std::cout << "[" << i << "/" << total << "] error opening input file: '"<< input_path << "'" << std::endl;
         return;
     }
 
@@ -64,20 +64,20 @@ void convert_image(const std::string& input_path, const std::string& output_path
     input_file.seekg(0, std::ios::beg);
 
     if (input_size == 0) {
-        std::cout << "failed to convert, file is empty: '" << input_path << "'" << std::endl;
+        std::cout << "[" << i << "/" << total << "] failed to convert, file is empty: '" << input_path << "'" << std::endl;
         return;
     }
 
     uint8_t* input_data = new uint8_t[input_size];
     if (!input_data) {
-        std::cout << "memory allocation failed" << std::endl;
+        std::cout << "[" << i << "/" << total << "] memory allocation failed" << std::endl;
         input_file.close();
         return;
     }
 
     // read the file into the buffer
     if (!input_file.read(reinterpret_cast<char*>(input_data), input_size)) {
-        std::cout << "error reading input file" << std::endl;
+        std::cout << "[" << i << "/" << total << "] error reading input file" << std::endl;
         delete[] input_data;
         input_file.close();
         return;
