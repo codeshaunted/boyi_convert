@@ -6,4 +6,4 @@
 ## Drag and Drop
 On Windows, you can drag and drop `.image` files onto `boyi_convert.exe`.
 ## CLI
-`boyi_convert <input_path> -o <output_path>` (`output_path` is optional`)
+`boyi_convert <input_path> -o <output_path>` (`output_path` is optional)
